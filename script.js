@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initMagicCanvas();
   initMusicPlayer();
   initCardInteractions();
+  initFirstTouchPlay();
 });
 
-// YouTube Iframe API Callback
+// YouTube Iframe API Callback (Fallback)
 window.onYouTubeIframeAPIReady = function() {
   ytPlayer = new YT.Player('yt-player', {
     height: '1',
@@ -45,9 +46,24 @@ function initMusicPlayer() {
   const musicPill = document.getElementById('music-pill');
   if (!musicPill) return;
 
-  musicPill.addEventListener('click', () => {
+  musicPill.addEventListener('click', (e) => {
+    e.stopPropagation();
     toggleMusic();
   });
+}
+
+function initFirstTouchPlay() {
+  // First touch or click anywhere on screen will start music (Mobile friendly)
+  const startOnFirstInteraction = () => {
+    if (!isPlaying) {
+      toggleMusic();
+    }
+    document.removeEventListener('click', startOnFirstInteraction);
+    document.removeEventListener('touchstart', startOnFirstInteraction);
+  };
+
+  document.addEventListener('click', startOnFirstInteraction, { once: true });
+  document.addEventListener('touchstart', startOnFirstInteraction, { once: true });
 }
 
 function toggleMusic() {
@@ -61,29 +77,32 @@ function toggleMusic() {
     musicPill.classList.add('playing');
     musicStatus.textContent = 'Đang phát: Tình Cờ Yêu Em 🎵';
 
-    // Try local audio first if available, otherwise use YouTube player
-    let localPlayed = false;
-    if (localAudio && localAudio.src) {
+    // Play local MP3 file
+    let localSuccess = false;
+    if (localAudio) {
+      localAudio.volume = 0.85;
       localAudio.play()
-        .then(() => { localPlayed = true; })
-        .catch(() => { localPlayed = false; });
+        .then(() => {
+          localSuccess = true;
+        })
+        .catch(() => {
+          // Fallback to YouTube player if local audio fails
+          if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+            ytPlayer.playVideo();
+          }
+        });
     }
 
-    // If local audio is not active or failed, play YouTube
-    setTimeout(() => {
-      if (!localPlayed && ytPlayer && typeof ytPlayer.playVideo === 'function') {
-        ytPlayer.playVideo();
-      }
-    }, 200);
-
-    // Audio chime feedback
+    // Audio chime feedback & heart burst
     playSweetChime();
     fireHeartBurst();
   } else {
     musicPill.classList.remove('playing');
     musicStatus.textContent = 'Bấm để phát nhạc 🎵';
 
-    if (localAudio) localAudio.pause();
+    if (localAudio) {
+      localAudio.pause();
+    }
     if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
       ytPlayer.pauseVideo();
     }
