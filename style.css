@@ -1,0 +1,483 @@
+/* ========================================================
+   20/10 SPECIAL THEME FOR "DỢ HÚIIII" - CLEAN & ELEGANT EDITION
+   Rich Romantic Aesthetics, Glassmorphism, Ambient Glow & Real Photo
+   ======================================================== */
+
+:root {
+  --primary-pink: #ff4b72;
+  --secondary-pink: #ff758c;
+  --accent-rose: #ff8da1;
+  --warm-peach: #fff2ed;
+  --glow-gold: #ffd166;
+  --text-dark: #3e2025;
+  --text-muted: #754f56;
+  
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-border: rgba(255, 255, 255, 0.95);
+  --card-shadow: 0 25px 60px rgba(255, 75, 114, 0.22);
+  --blur-strong: blur(20px);
+  
+  --radius-pill: 9999px;
+  --radius-card: 32px;
+  --radius-circle: 50%;
+  
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 40%, #ffd4de 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+/* Background Canvas for Falling Petals & Mouse Trail */
+#magic-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient Dreamy Glow Orbs */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  animation: floatOrb 10s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #ff8da1, rgba(255, 141, 161, 0));
+  top: -60px;
+  left: -80px;
+}
+
+.orb-2 {
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, #ffd166, rgba(255, 209, 102, 0));
+  bottom: -80px;
+  right: -90px;
+  animation-delay: -4s;
+}
+
+.orb-3 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, #ff6b8b, rgba(255, 107, 139, 0));
+  top: 45%;
+  left: 55%;
+  animation-delay: -7s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 40px) scale(1.15); }
+}
+
+/* ========================================================
+   MUSIC MINI-PILL PLAYER (TOP FIXED)
+   ======================================================== */
+.music-pill {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px 8px 10px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--blur-strong);
+  -webkit-backdrop-filter: var(--blur-strong);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 24px rgba(255, 75, 114, 0.18);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.music-pill:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 75, 114, 0.28);
+  background: #ffffff;
+}
+
+.disc-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 12px rgba(255, 75, 114, 0.35);
+  transition: transform 0.5s ease;
+}
+
+.music-pill.playing .disc-icon {
+  animation: spinDisc 3s linear infinite;
+}
+
+@keyframes spinDisc {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.music-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.music-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--primary-pink);
+}
+
+.music-waves {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+}
+
+.music-waves span {
+  width: 2.5px;
+  background: var(--primary-pink);
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.2s;
+}
+
+.music-pill.playing .music-waves span:nth-child(1) {
+  animation: wavePulse 0.6s infinite alternate ease-in-out;
+}
+.music-pill.playing .music-waves span:nth-child(2) {
+  animation: wavePulse 0.4s infinite alternate ease-in-out 0.15s;
+}
+.music-pill.playing .music-waves span:nth-child(3) {
+  animation: wavePulse 0.8s infinite alternate ease-in-out 0.3s;
+}
+.music-pill.playing .music-waves span:nth-child(4) {
+  animation: wavePulse 0.5s infinite alternate ease-in-out 0.2s;
+}
+
+@keyframes wavePulse {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+/* ========================================================
+   MAIN SCENE & ROMANTIC GLASS CARD
+   ======================================================== */
+.scene-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 540px;
+  margin: auto;
+}
+
+.card-wrapper {
+  perspective: 1000px;
+}
+
+.romantic-card {
+  background: var(--card-bg);
+  backdrop-filter: var(--blur-strong);
+  -webkit-backdrop-filter: var(--blur-strong);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 40px 32px 34px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.romantic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: cardShimmer 6s infinite ease-in-out;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardShimmer {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  35%, 100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* Card Tag (Top Pill) */
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 75, 114, 0.25);
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--primary-pink);
+  margin-bottom: 22px;
+  box-shadow: 0 4px 14px rgba(255, 75, 114, 0.12);
+}
+
+.sparkle {
+  color: #ffb703;
+}
+
+/* Couple Art Frame */
+.card-art-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 22px;
+  cursor: pointer;
+}
+
+.glowing-halo {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 117, 140, 0.65) 0%, rgba(255, 209, 102, 0.35) 50%, transparent 70%);
+  animation: haloPulse 3s infinite ease-in-out;
+}
+
+.art-frame {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #ffffff;
+  box-shadow: 0 12px 28px rgba(255, 75, 114, 0.28);
+  transition: transform 0.4s ease;
+}
+
+.card-art-container:hover .art-frame {
+  transform: scale(1.04);
+}
+
+.couple-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.card-art-container:hover .couple-art-img {
+  transform: scale(1.08);
+}
+
+.floating-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -6px;
+  z-index: 3;
+  background: #ffffff;
+  color: var(--primary-pink);
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 75, 114, 0.2);
+  white-space: nowrap;
+}
+
+@keyframes haloPulse {
+  0%, 100% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Greeting Header */
+.card-header {
+  margin-bottom: 20px;
+}
+
+.greeting-subtitle {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.greeting-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.5rem, 6.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(45deg, #ff1461, #ff758c, #ff4b72);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 10px rgba(255, 20, 97, 0.25));
+}
+
+/* The Heartfelt Wish Box */
+.wish-box {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(255, 117, 140, 0.25);
+  border-radius: 22px;
+  padding: 26px 30px;
+  margin-bottom: 26px;
+  box-shadow: 0 10px 28px rgba(255, 75, 114, 0.12);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wish-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(255, 75, 114, 0.18);
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: var(--secondary-pink);
+  line-height: 0;
+  position: absolute;
+  opacity: 0.45;
+}
+
+.quote-mark.open {
+  top: 18px;
+  left: 14px;
+}
+
+.quote-mark.close {
+  bottom: 8px;
+  right: 14px;
+}
+
+.wish-text {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+}
+
+/* Card Footer */
+.card-footer {
+  border-top: 1px dashed rgba(255, 117, 140, 0.3);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.footer-sign {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--primary-pink);
+}
+
+/* Responsive adjustments */
+@media (max-width: 580px) {
+  body {
+    padding: 16px;
+  }
+  
+  .music-pill {
+    top: 14px;
+    right: 14px;
+    padding: 6px 14px 6px 8px;
+  }
+
+  .disc-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
+
+  .music-title {
+    font-size: 0.8rem;
+  }
+
+  .music-status {
+    font-size: 0.68rem;
+  }
+
+  .romantic-card {
+    padding: 32px 20px 24px;
+  }
+
+  .card-art-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .wish-box {
+    padding: 20px 20px;
+  }
+
+  .wish-text {
+    font-size: 1.08rem;
+  }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 20/10 • Dành Riêng Cho Dợ Húiiii 💖</title>
+  <meta name="description" content="Thiệp chúc mừng 20.10 ngọt ngào dành tặng dợ húiiii của anh.">
+
+  <!-- Google Fonts: Playfair Display, Dancing Script, Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas Background for Floating Petals, Hearts & Mouse Trail -->
+  <canvas id="magic-canvas"></canvas>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
+  <!-- Music Mini-Player (Tình Cờ Yêu Em) -->
+  <div class="music-pill" id="music-pill" title="Bật/Tắt bài hát Tình Cờ Yêu Em">
+    <div class="disc-icon" id="disc-icon">
+      <i class="fa-solid fa-compact-disc"></i>
+    </div>
+    <div class="music-info">
+      <span class="music-title">Tình Cờ Yêu Em</span>
+      <span class="music-status" id="music-status">Bấm để phát nhạc 🎵</span>
+    </div>
+    <div class="music-waves" id="music-waves">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- YouTube Audio Container (Hidden) -->
+  <div id="yt-player-container" style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
+    <div id="yt-player"></div>
+  </div>
+  <!-- Fallback Local Audio -->
+  <audio id="local-audio" src="assets/tinh-co-yeu-em.mp3" preload="auto" loop></audio>
+
+  <!-- Main Showcase Container -->
+  <div class="scene-container">
+    <main class="card-wrapper">
+      
+      <!-- Romantic 3D Glass Card -->
+      <article class="romantic-card" id="love-card">
+        
+        <!-- Top Festive Tag -->
+        <div class="card-tag">
+          <span class="sparkle">✨</span> 20 Tháng 10 • Ngày Phụ Nữ Việt Nam <span class="sparkle">✨</span>
+        </div>
+
+        <!-- Real Couple Photo with Glowing Halo Frame -->
+        <div class="card-art-container" id="card-art" title="Chạm nhẹ vào ảnh để bắn tim 💕">
+          <div class="glowing-halo"></div>
+          <div class="art-frame">
+            <img src="assets/my_love.jpg" alt="Khoảnh khắc ngọt ngào của Dợ Húiiii và anh" class="couple-art-img" onerror="this.src='my_love.jpg'">
+          </div>
+          <span class="floating-badge">💖 Em bé số 1</span>
+        </div>
+
+        <!-- Greeting Header -->
+        <header class="card-header">
+          <p class="greeting-subtitle">Gửi người anh yêu thương nhất,</p>
+          <h1 class="greeting-name">Dợ Húiiii 💕</h1>
+        </header>
+
+        <!-- The Heartfelt Wish -->
+        <div class="wish-box" id="wish-box">
+          <div class="quote-mark open">“</div>
+          <p class="wish-text">
+            Chúc dợ iuu 20.10 vui vẻ, mong ăn chóng lớn, có tất cả trừ vất vả, học tập tốt và yêu anh nhìu hơnnnn!
+          </p>
+          <div class="quote-mark close">”</div>
+        </div>
+
+        <!-- Footer Sign-off -->
+        <footer class="card-footer">
+          <span class="footer-note">Mãi cưng chiều & yêu thương em</span>
+          <span class="footer-sign">Chàng trai của dợ húi 💖</span>
+        </footer>
+
+      </article>
+
+    </main>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
